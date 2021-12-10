@@ -29,9 +29,13 @@ public class ProductoController {
 	
 	@GetMapping("/")
 	public String index(Model model) throws Exception {
+		
 		logger.info("call index()");
 		
 		List<Producto> productos = productoService.findAll();
+		
+		logger.info(">>>>>" + productos.toString());
+		
 		model.addAttribute("productos", productos);
 		
 		return "productos/index";
