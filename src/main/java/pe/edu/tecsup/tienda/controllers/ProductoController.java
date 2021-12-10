@@ -34,7 +34,9 @@ public class ProductoController {
 		
 		List<Producto> productos = productoService.findAll();
 		
-		logger.info(">>>>>" + productos.toString());
+		//logger.info(">>>>>" + productos.toString());
+		
+		productos.stream().forEach(prod -> logger.info(prod.toString()));
 		
 		model.addAttribute("productos", productos);
 		
