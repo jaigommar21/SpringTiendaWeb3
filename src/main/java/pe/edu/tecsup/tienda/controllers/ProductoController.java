@@ -83,6 +83,26 @@ public class ProductoController {
 		return "redirect:/productos/";
 	}
 	
+	
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable Long id, Model model) throws Exception {
+		
+		logger.info("Edit edit(id: " + id + ")");
+		
+		List<Categoria> categorias = categoriaService.findAll();
+		model.addAttribute("categorias", categorias);  //
+		
+		// Get info of product ID
+		Producto producto = productoService.findById(id);
+		model.addAttribute("producto", producto);      // producto found
+		
+		return "productos/edit";
+	}
+
+	
+	
+	// http://localhost:8080/productos/delete/108
+	
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable Long id, RedirectAttributes redirectAttrs) throws Exception {
 		
