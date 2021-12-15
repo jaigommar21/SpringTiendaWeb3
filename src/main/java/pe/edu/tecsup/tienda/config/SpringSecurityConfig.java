@@ -1,17 +1,13 @@
 package pe.edu.tecsup.tienda.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 class PasswordEncoderRaw implements PasswordEncoder {	// No encriptado, Texto Plano
 	
@@ -36,15 +32,25 @@ public class SpringSecurityConfig
 		// return new BCryptPasswordEncoder();	// Algoritmo BCrypt
 	}
 	
-	@Bean
-	@Override
-	public UserDetailsService userDetailsServiceBean() throws Exception {
+//	@Bean
+//	@Override
+//	public UserDetailsService userDetailsServiceBean() throws Exception {
+//
+//		List<UserDetails> users = new ArrayList<UserDetails>();
+//		users.add(User.withUsername("user").password("user").roles("USER").build());
+//		users.add(User.withUsername("admin").password("admin").roles("USER", "ADMIN").build());
+//
+//		return new InMemoryUserDetailsManager(users);
+//	}
 
-		List<UserDetails> users = new ArrayList<UserDetails>();
-		users.add(User.withUsername("user").password("user").roles("USER").build());
-		users.add(User.withUsername("admin").password("admin").roles("USER", "ADMIN").build());
-
-		return new InMemoryUserDetailsManager(users);
+	
+	@Autowired
+	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	public void configureAuth(AuthenticationManagerBuilder auth) throws Exception{
+		auth.userDetailsService(userDetailsService);
 	}
 
+	
 }
