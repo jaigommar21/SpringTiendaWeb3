@@ -18,7 +18,11 @@
     <th:block th:fragment="content">
 
 
-		<form action="" th:action="@{/productos/update}" method="post" enctype="multipart/form-data" th:object="${producto}">
+		<form 	th:action="@{/productos/update}" 
+				method="post" 
+				enctype="multipart/form-data" 
+				th:object="${producto}">
+		
 			<div class="card mb-3">
 				<div class="card-header">
 	            	Editar Producto
