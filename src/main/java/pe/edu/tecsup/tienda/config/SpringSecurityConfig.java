@@ -61,7 +61,7 @@ public class SpringSecurityConfig
 	        	.formLogin()
 	        	.loginPage("/login")
 	        	.loginProcessingUrl("/authenticate")
-	        	.defaultSuccessUrl("/")
+	        	.defaultSuccessUrl("/productos/")
 	        	.failureUrl("/login?error")
 	        	.usernameParameter("username").passwordParameter("password")
 	    	.and()
